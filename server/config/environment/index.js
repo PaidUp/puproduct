@@ -33,6 +33,7 @@ let all = {
   },
   // MongoDB connection options
   mongo: {
+    uri: 'mongodb://localhost/convenience-dev',
     options: {
       db: {
         safe: true
