@@ -6,10 +6,10 @@ const config = require('../../config/environment/index.js')
 
 let organizationSchema = new Schema({
   // Team info
-  teamName: { type: String, required: true}, // email //response
-  teamNumber: { type: String, default: '1'}, // email
-  teamAverageSize: { type: String, default: '1' }, // email
-  teamSport: {type: String},
+  // teamName: { type: String, default: true}, // email //response
+  // teamNumber: { type: String, default: '1'}, // email
+  // teamAverageSize: { type: String, default: '1' }, // email
+  // teamSport: {type: String},
   // End team info
   // Owner info
   ownerId: { type: String},
@@ -31,7 +31,7 @@ let organizationSchema = new Schema({
   AddressLineTwo: { type: String}, // required //email //newDesign
   website: { type: String, default: 'https://www.getpaidup.com'}, // email
   businessName: { type: String, required: true}, // required //email //newDesign
-  phoneNumber: { type: String, default: '0000000000'}, // email
+  // phoneNumber: { type: String, default: '0000000000'}, // email
   businessType: { type: String, required: true}, // required //newDesign
   // End billing info
   // Billing info
