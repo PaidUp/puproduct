@@ -98,9 +98,17 @@ function organizationRequest (userId, dataOrganization, cb) {
 
 function organizationResponse (organizationId, cb) {
   findOne({verify: 'pending', _id: organizationId}, '', function (err, organization) {
+    if (err) return cb(err)
+    if (!organization) return cb(null)
     organization.aba = decryptField(organization.aba)
     organization.dda = decryptField(organization.dda)
     organization.ownerSSN = decryptField(organization.ownerSSN)
+    return cb(null, organization)
+  })
+}
+
+function organizationResponseUpdate (organizationId, cb) {
+  update({_id: organizationId}, {verify: 'done', aba: '', dda: '', ownerSSN: ''}, function (err, organization) {
     if (err) return cb(err)
     return cb(null, organization)
   })
@@ -118,3 +126,4 @@ exports.decryptField = decryptField
 exports.getlast4Field = getlast4Field
 exports.organizationRequest = organizationRequest
 exports.organizationResponse = organizationResponse
+exports.organizationResponseUpdate = organizationResponseUpdate

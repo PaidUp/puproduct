@@ -23,14 +23,18 @@ exports.organizationResponse = function (req, res) {
     }
     return res.status(200).json(organization)
   })
-/*
-  commerceService.organizationResponseUpdate(organizationId, {verify: 'done', aba: '', dda: '', ownerSSN: ''}, function (err, organizationData) {
+}
+
+exports.organizationResponseUpdate = function organizationResponseUpdate (req, res) {
+  organizationService.organizationResponseUpdate(req.params.id, function (err, organization) {
     if (err) {
-      // return handleError(res, err)
-      return res.status(403).json({})
+      return handleError(res, err)
     }
+    if (!organization) {
+      return handleError(res, {name: 'ValidationError', message: 'organization was processed', errors: 'organization does not exists or was processed'})
+    }
+    return res.status(200).json(organization)
   })
-})*/
 }
 
 function handleError (res, err) {
