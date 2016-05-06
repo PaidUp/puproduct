@@ -8,5 +8,6 @@ const router = express.Router()
 
 router.post('/request', authService.isAuthenticated(), controller.organizationRequest)
 router.get('/response/:id', authService.isAuthenticated(), controller.organizationResponse)
+router.put('/response/:id', authService.isAuthenticated(), controller.organizationResponseUpdate)
 
 module.exports = router
