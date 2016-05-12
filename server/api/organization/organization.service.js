@@ -107,8 +107,8 @@ function organizationResponse (organizationId, cb) {
   })
 }
 
-function organizationResponseUpdate (organizationId, cb) {
-  update({_id: organizationId}, {verify: 'done', aba: '', dda: '', ownerSSN: ''}, function (err, organization) {
+function organizationResponseUpdate (organizationId, paymentId, cb) {
+  update({_id: organizationId}, {verify: 'done', aba: '', dda: '', ownerSSN: '', paymentId: paymentId}, function (err, organization) {
     if (err) return cb(err)
     return cb(null, organization)
   })
