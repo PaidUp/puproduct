@@ -26,7 +26,7 @@ exports.organizationResponse = function (req, res) {
 }
 
 exports.organizationResponseUpdate = function organizationResponseUpdate (req, res) {
-  organizationService.organizationResponseUpdate(req.params.id, function (err, organization) {
+  organizationService.organizationResponseUpdate(req.params.id, req.params.paymentId, function (err, organization) {
     if (err) {
       return handleError(res, err)
     }
