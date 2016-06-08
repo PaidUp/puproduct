@@ -75,9 +75,11 @@ function decryptField (encryptedValue) {
   return decrypted
 }
 
-/*function verifySSN(ssn) {
-  return isValidSSN(ssn)
-}*/
+/*
+  function verifySSN(ssn) {
+    return isValidSSN(ssn)
+  }
+*/
 
 function getlast4Field (encryptedValue) {
   let last4Field = decryptField(encryptedValue)
