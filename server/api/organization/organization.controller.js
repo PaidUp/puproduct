@@ -37,6 +37,15 @@ exports.organizationResponseUpdate = function organizationResponseUpdate (req, r
   })
 }
 
+exports.getOrganization = function (req, res) {
+  organizationService.findById(req.params.organizationId, function (err, organization) {
+    if (err) {
+      return handleError(res, err)
+    }
+    return res.status(200).json(organization)
+  })
+}
+
 function handleError (res, err) {
   let httpErrorCode = 500
   let errors = []
