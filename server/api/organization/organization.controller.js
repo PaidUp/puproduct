@@ -38,10 +38,7 @@ exports.organizationResponseUpdate = function organizationResponseUpdate (req, r
 }
 
 exports.getOrganization = function (req, res) {
-  console.log('getOrganization req.params', req.params)
   organizationService.findById(req.params.organizationId, function (err, organization) {
-    console.log('getOrganization err', err)
-    console.log('getOrganization organization', organization)
     if (err) {
       return handleError(res, err)
     }
