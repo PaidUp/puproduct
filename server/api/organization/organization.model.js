@@ -42,7 +42,8 @@ let organizationSchema = new Schema({
   updateAt: {type: Date, default: new Date()},
   verify: {type: String,default: 'pending'},
   referralCode: { type: String, default: ''}, // email
-  paymentId: { type: String, default: ''}
+  paymentId: { type: String, default: ''},
+  seasons: { type: [String], default: []}
 })
 
 /**
