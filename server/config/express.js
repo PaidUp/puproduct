@@ -2,13 +2,12 @@
  * Express configuration
  */
 
-'use strict'
-const compression = require('compression')
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
-const cookieParser = require('cookie-parser')
+import compression from 'compression'
+import bodyParser from 'body-parser'
+import methodOverride from 'method-override'
+import cookieParser from 'cookie-parser'
 
-module.exports = function (app) {
+export default function (app) {
   app.use(compression())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())

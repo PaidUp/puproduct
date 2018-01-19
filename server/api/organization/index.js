@@ -1,8 +1,6 @@
-'use strict'
-
-const express = require('express')
-const authService = require('../auth/auth.service')
-const controller = require('./organization.controller')
+import express from 'express'
+import authService from '../auth/auth.service'
+import controller from './organization.controller'
 
 const router = express.Router()
 

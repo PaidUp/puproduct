@@ -1,19 +1,18 @@
-'use strict'
-
+import organizationService from './organization.service'
 const logger = require('../../config/logger')
-const organizationService = require('./organization.service')
-// const config = require('../../../config/environment')
 
-exports.organizationRequest = function (req, res) {
-  organizationService.organizationRequest(req.body.userId, req.body.organizationInfo, function (err, organization) {
-    if (err) {
-      return handleError(res, err)
+const organizationController = {}
+
+organizationController.organizationRequest = function (req, res) {
+  organizationService.organizationRequest(req.body.userId, req.body.organizationInfo, function (error, organization) {
+    if (error) {
+      return handleError(res, error)
     }
     return res.status(200).json({organizationId: organization._id})
   })
 }
 
-exports.organizationResponse = function (req, res) {
+organizationController.organizationResponse = function (req, res) {
   organizationService.organizationResponse(req.params.id, function (err, organization) {
     if (err) {
       return handleError(res, err)
@@ -25,7 +24,7 @@ exports.organizationResponse = function (req, res) {
   })
 }
 
-exports.organizationResponseUpdate = function organizationResponseUpdate (req, res) {
+organizationController.organizationResponseUpdate = function organizationResponseUpdate (req, res) {
   organizationService.organizationResponseUpdate(req.params.id, req.params.paymentId, function (err, organization) {
     if (err) {
       return handleError(res, err)
@@ -37,7 +36,7 @@ exports.organizationResponseUpdate = function organizationResponseUpdate (req, r
   })
 }
 
-exports.getOrganization = function (req, res) {
+organizationController.getOrganization = function (req, res) {
   organizationService.findById(req.params.organizationId, function (err, organization) {
     if (err) {
       return handleError(res, err)
@@ -48,7 +47,6 @@ exports.getOrganization = function (req, res) {
 
 function handleError (res, err) {
   let httpErrorCode = 500
-  let errors = []
 
   if (err.name === 'ValidationError') {
     httpErrorCode = 400
@@ -57,3 +55,5 @@ function handleError (res, err) {
 
   return res.status(httpErrorCode).json({code: err.name, message: err.message, errors: err.errors})
 }
+
+export default organizationController

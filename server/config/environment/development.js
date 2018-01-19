@@ -1,6 +1,3 @@
-'use strict'
-var path = require('path')
-
 // Development specific configuration
 // ==================================
 const mongoHost = process.env.TDUSER_MONGO_HOST || 'localhost'
