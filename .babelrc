@@ -1,9 +1,4 @@
 {
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": "current"
-      }
-    }]
-  ]
+  "presets": ["es2015"],
+  "plugins": [["module-alias", [{ "src": "./server", "expose": "@" }]]]
 }

@@ -13,16 +13,9 @@
     "extends": "standard"
   },
   "scripts": {
-    "start": "node server/app.js",
-    "clean:dist": "rm -rf dist",
-    "clean:build": "rm -rf build",
-    "create:dist": "mkdir dist",
-    "create:build": "mkdir build",
-    "test": "NODE_ENV=test mocha server/**/*.spec.js --reporter xunit > build/test-result.xml",
-    "jenkins": "npm run clean:build && npm run create:build && npm test",
-    "build:server": "cp -R server/ dist/server",
-    "build:client": "cp -R client/ dist/public",
-    "build": "npm run clean:dist && npm run create:dist && npm run build:server && npm run build:client",
+    "start": "node dist/build.js",
+    "test": "mocha --timeout 10000 --compilers js:babel-core/register ./test/**/*.spec.js",
+    "jenkins": "npm test",
     "dev": "cross-env NODE_ENV=development webpack --watch"
   },
   "keywords": [
@@ -32,6 +25,8 @@
   "author": "@paidUp",
   "license": "private",
   "dependencies": {
+    "@google-cloud/logging": "^1.1.2",
+    "TDCore": "https://github.com/talosdigital/TDCore/tarball/master",
     "blind": "^1.0.0",
     "body-parser": "^1.14.1",
     "camelize": "^1.0.0",
@@ -44,17 +39,20 @@
     "magento": "https://github.com/talosdigital/magentoapi/tarball/master",
     "method-override": "^2.3.5",
     "moment": "^2.20.1",
-    "mongoose": "^4.13.9",
+    "mongoose": "^5.0.1",
     "pmx": "^0.6.1",
-    "TDCore": "https://github.com/talosdigital/TDCore/tarball/master",
     "winston": "^2.1.1",
     "winston-loggly": "^1.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-module-alias": "^1.6.0",
     "babel-preset-env": "^1.6.1",
-    "chai": "^3.4.1",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "cross-env": "^5.1.3",
     "eslint": "^4.15.0",
     "eslint-config-standard": "^11.0.0-beta.0",

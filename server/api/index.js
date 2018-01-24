@@ -1,7 +1,7 @@
-'use strict'
-
-const express = require('express')
+import express from 'express'
+import organization from './organization'
 const router = express.Router()
 
-router.use('/organization', require('./organization'))
-module.exports = router
+router.use('/organization', organization)
+
+export default router

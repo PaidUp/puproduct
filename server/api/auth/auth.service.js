@@ -1,4 +1,4 @@
-import config from '../../config/environment'
+import config from '@/config/environment'
 import compose from 'composable-middleware'
 /**
  * Attaches the user object to the request if authenticated

@@ -1,7 +1,14 @@
-'use strict'
+import path from 'path'
+import _ from 'lodash'
+import development from './development'
+import production from './production'
+import test from './test'
 
-const path = require('path')
-const _ = require('lodash')
+const envs = {
+  development,
+  production,
+  test
+}
 
 // All configurations will extend these options
 // ============================================
@@ -24,36 +31,16 @@ let all = {
       'token': 'puproduct-secret'
     }
   },
-  // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/convenience-dev',
-    options: {
-      db: {
-        safe: true
-      },
-      prefix: 'puproduct_'
-    }
-  },
-
   logger: {
-    level: {
-      info: 'info',
-      warn: 'warn',
-      error: 'error'
-    },
-    loggly: {
-      inputToken: 'e2834f96-0326-43f1-8fd9-04dd669a11ef',
-      subdomain: 'cstest',
-      tags: ['PUProduct'],
-      level: 'error'
-    }
+    projectId: 'gothic-talent-192920',
+    logName: 'pu-product-dev-log',
+    metadata: {resource: {type: 'global'}}
   },
   encryptKey: 'PZ3oXv2v6Pq5HAPFI9NFbQ=='
 }
 
 // Export the config object based on the NODE_ENV
 // ==============================================
-module.exports = all
-module.exports = _.merge(
+export default _.merge(
   all,
-  require('./' + process.env.NODE_ENV + '.js') || {})
+  envs[process.env.NODE_ENV] || {})

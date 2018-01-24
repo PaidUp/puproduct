@@ -1,7 +1,6 @@
-'use strict'
-const faker = require('faker')
+import faker from 'faker'
 
-let data = {
+export default {
   organization: {
     // Team info
     teamName: faker.company.companyName(),
@@ -42,5 +41,3 @@ let data = {
 // encryptKey : 'PZ3oXv2v6Pq5HAPFI9NFbQ==',
 // encryptValue : ''
 }
-
-module.exports = data

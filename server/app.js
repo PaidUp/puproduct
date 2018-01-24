@@ -2,9 +2,9 @@ import pmx from 'pmx'
 import express from 'express'
 import mongoose from 'mongoose'
 import config from './config/environment'
-import http from 'http'
 import configExpress from './config/express'
 import routes from './routes'
+import Logger from './util/logger'
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
@@ -17,22 +17,25 @@ pmx.init({
   ports: true // Shows which ports your app is listening on (default: false)
 })
 
-mongoose.connect(config.mongo.uri, config.mongo.options)
-
 const app = express()
-const server = http.createServer(app)
+// const server = http.createServer(app)
 configExpress(app)
 routes(app)
 
 // Start server
-if (config.env !== 'test') {
-  try {
-    server.listen(config.port, config.ip, function () {
-      console.log('Express server listening on %d, in %s mode', config.port, app.get('env'))
-    })
-  } catch (err) {
-    console.log('error:', err)
-  }
-}
+var server = app.listen(config.port, config.ip, function () {
+  mongoose.connect(config.mongo.uri, config.mongo.options, error => {
+    if (error) {
+      return Logger.error(error)
+    }
+    Logger.info('Connected to database')
+  })
+  Logger.info(`pu-product listening on ${config.port}, in ${app.get('env')} mode`)
+})
 
-export default app
+process.on('exit', (cb) => {
+  mongoose.connection.close()
+  console.log('bye......')
+})
+
+export default server
