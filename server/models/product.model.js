@@ -105,19 +105,27 @@ export default class ProductModel {
 
   static find (filter) {
     return new Promise((resolve, reject) => {
-      Model.find(filter, (err, data) => {
-        if (err) return reject(err)
-        resolve(data)
-      })
+      try {
+        Model.find(filter, (err, data) => {
+          if (err) return reject(err)
+          resolve(data)
+        })
+      } catch (error) {
+        reject(error)
+      }
     })
   }
 
   static findOne (filter) {
     return new Promise((resolve, reject) => {
-      Model.findOne(filter, (err, data) => {
-        if (err) return reject(err)
-        resolve(data)
-      })
+      try {
+        Model.findOne(filter, (err, data) => {
+          if (err) return reject(err)
+          resolve(data)
+        })
+      } catch (error) {
+        reject(error)
+      }
     })
   }
 
@@ -127,10 +135,14 @@ export default class ProductModel {
 
   static updateById (id, values) {
     return new Promise((resolve, reject) => {
-      Model.findByIdAndUpdate(id, values, { new: true }, (err, data) => {
-        if (err) return reject(err)
-        resolve(data)
-      })
+      try {
+        Model.findByIdAndUpdate(id, values, { new: true }, (err, data) => {
+          if (err) return reject(err)
+          resolve(data)
+        })
+      } catch (error) {
+        reject(error)
+      }
     })
   }
 }

@@ -60,21 +60,28 @@ export default class OrganizationModel {
   }
 
   static findOne (filter) {
-    console.log('Filter: ', filter)
     return new Promise((resolve, reject) => {
-      Model.findOne(filter, (err, data) => {
-        if (err) return reject(err)
-        resolve(data)
-      })
+      try {
+        Model.findOne(filter, (err, data) => {
+          if (err) return reject(err)
+          resolve(data)
+        })
+      } catch (error) {
+        reject(error)
+      }
     })
   }
 
   static updateById (id, value) {
     return new Promise((resolve, reject) => {
-      Model.findByIdAndUpdate(id, value, { new: true }, (err, data) => {
-        if (err) return reject(err)
-        resolve(data)
-      })
+      try {
+        Model.findByIdAndUpdate(id, value, { new: true }, (err, data) => {
+          if (err) return reject(err)
+          resolve(data)
+        })
+      } catch (error) {
+        reject(error)
+      }
     })
   }
 
