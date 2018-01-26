@@ -1,5 +1,5 @@
-import OrganizationModel from '@/models/organization.model.js'
-import Ncryp from '@/util/ncryp'
+import { OrganizationModel } from '@/models'
+import { Ncryp } from '@/util'
 
 export default class OrganizationService {
   static organizationRequest (userId, dataOrganization) {
@@ -11,7 +11,7 @@ export default class OrganizationService {
   }
 
   static organizationResponse (organizationId) {
-    return OrganizationModel.findOne({organizationId}).then(organization => organization)
+    return OrganizationModel.findById(organizationId).then(organization => organization)
   }
 
   static organizationResponseUpdate (organizationId, paymentId, cb) {

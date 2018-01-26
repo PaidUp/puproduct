@@ -1,4 +1,4 @@
-import mongoose, { Promise } from 'mongoose'
+import mongoose from 'mongoose'
 import config from '@/config/environment'
 
 let schema = new mongoose.Schema({
@@ -63,7 +63,8 @@ export default class OrganizationModel {
     })
   }
 
-  static findOne ({ filter }) {
+  static findOne (filter) {
+    console.log('Filter: ', filter)
     return new Promise((resolve, reject) => {
       Model.findOne(filter, (err, data) => {
         if (err) return reject(err)

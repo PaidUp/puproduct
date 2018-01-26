@@ -1,5 +1,5 @@
-import OrganizationService from '@/services/organization.service'
-import HandlerResponse from '@/util/handlerResponse'
+import { OrganizationService } from '@/services'
+import { HandlerResponse } from '@/util'
 
 export default class OrganizationCotroller {
   static organizationRequest (req, res) {

@@ -1,7 +1,7 @@
 import express from 'express'
 import authService from '@/api/auth/auth.service'
-import OrganizationController from './organization.controller'
-import ProductController from '@/api/product/product.controller'
+// import controllers from '@/controllers'
+import {OrganizationController, ProductController} from '@/controllers'
 
 const router = express.Router()
 router.post('/request', authService.isAuthenticated(), OrganizationController.organizationRequest)
@@ -10,5 +10,6 @@ router.put('/response/:id/:paymentId', authService.isAuthenticated(), Organizati
 router.get('/:organizationId', authService.isAuthenticated(), OrganizationController.getOrganization)
 
 router.get('/:organizationId/products', authService.isAuthenticated(), ProductController.getProductsByOrganizationId)
+router.get('/:organizationId/product/:productId', authService.isAuthenticated(), ProductController.getProductByOrganizationId)
 
 export default router

@@ -1,4 +1,4 @@
-import mongoose, { Promise } from 'mongoose'
+import mongoose from 'mongoose'
 import config from '@/config/environment'
 
 const formData = {
@@ -59,17 +59,17 @@ const schema = new mongoose.Schema({
   visibility: { type: Boolean, required: true, default: true }, //
   status: { type: Boolean, required: true, default: true }, //
   image: { type: String, required: true }, //
-  categories: { type: [String], default: [] }, //
-  relatedProducts: { type: [String], default: [] }, //
+  categories: { type: [String] }, //
+  relatedProducts: { type: [String] }, //
   statementDescriptor: { type: String, required: true }, //
   customInfo: {
-    formData: { type: [formData], required: true, default: [] },
-    formTemplate: { type: [formTemplate], required: true, default: [] }
+    formData: { type: [formData], required: true },
+    formTemplate: { type: [formTemplate], required: true }
   }, //
   processingFees: { type: processingFees, required: true }, //
   collectionsFee: { type: collectionsFee, required: true }, //
   paysFees: { type: paysFees, required: true },
-  creted: { type: Date, required: true, default: Date.now }, //
+  created: { type: Date, required: true, default: Date.now }, //
   updated: { type: Date, required: true, default: Date.now } //
 })
 const Model = mongoose.model(
@@ -78,13 +78,11 @@ const Model = mongoose.model(
   config.mongo.prefix + 'products'
 )
 
-/* 0*
-* Pre-save hook
-*/
-
 schema.pre('save', function (next) {
-  if (!this.isNew) return next()
-  this.updated = Date.now
+  if (this.isNew) this.updated = Date.now
+  else {
+    this.created = Date.now
+  }
   next()
 })
 
@@ -114,7 +112,25 @@ export default class ProductModel {
     })
   }
 
+  static findOne (filter) {
+    return new Promise((resolve, reject) => {
+      Model.findOne(filter, (err, data) => {
+        if (err) return reject(err)
+        resolve(data)
+      })
+    })
+  }
+
   static findById (_id) {
     return Model.findById(_id).exec()
+  }
+
+  static updateById (id, value) {
+    return new Promise((resolve, reject) => {
+      Model.findByIdAndUpdate(id, value, { new: true }, (err, data) => {
+        if (err) return reject(err)
+        resolve(data)
+      })
+    })
   }
 }

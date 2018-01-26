@@ -35,4 +35,5 @@ describe('loading express', function () {
   })
 
   importTest('organization: /api/v1/organization ', './organization');
+  importTest('product: /api/v1/product ', './product');
 })
