@@ -1,23 +1,8 @@
 import config from '@/config/environment'
-import compose from 'composable-middleware'
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403
  */
-
-const authService = {}
-
-authService.isAuthenticated = function () {
-  return compose().use(function (req, res, next) {
-    let token = serverTokenAuthenticated(req)
-    let localToken = config.nodePass.me.token
-    if (token === localToken) {
-      return next()
-    } else {
-      return res.sendStatus(401)
-    }
-  })
-}
 
 function serverTokenAuthenticated (req) {
   let token = null
@@ -34,4 +19,12 @@ function serverTokenAuthenticated (req) {
   return token
 }
 
-export default authService
+export default function (req, res, next) {
+  let token = serverTokenAuthenticated(req)
+  let localToken = config.nodePass.me.token
+  if (token === localToken) {
+    return next()
+  } else {
+    return res.sendStatus(401)
+  }
+}
