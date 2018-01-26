@@ -1,5 +1,4 @@
-import mongoose from 'mongoose'
-import config from '@/config/environment'
+import BaseModel from './base.model'
 
 const formData = {
   model: { type: String, required: true },
@@ -43,7 +42,7 @@ const geojson = {
   coordinates: {type: [Number], required: true}
 }
 
-const schema = new mongoose.Schema({
+const schema = {
   paymentId: { type: String, required: true },
   season: { type: String, required: true },
   organizationId: { type: String, required: true },
@@ -68,81 +67,11 @@ const schema = new mongoose.Schema({
   },
   processingFees: { type: processingFees, required: true },
   collectionsFee: { type: collectionsFee, required: true },
-  paysFees: { type: paysFees, required: true },
-  created: { type: Date, required: true, default: Date.now },
-  updated: { type: Date, required: true, default: Date.now }
-})
-const Model = mongoose.model(
-  'product',
-  schema,
-  config.mongo.prefix + 'products'
-)
+  paysFees: { type: paysFees, required: true }
+}
 
-schema.pre('save', function (next) {
-  if (this.isNew) this.updated = Date.now
-  else {
-    this.created = Date.now
-  }
-  next()
-})
-
-export default class ProductModel {
-  static save (prod) {
-    return new Promise((resolve, reject) => {
-      try {
-        let product = new Model(prod)
-        product.save((err, data) => {
-          if (err) {
-            return reject(err)
-          }
-          return resolve(data)
-        })
-      } catch (error) {
-        return reject(error)
-      }
-    })
-  }
-
-  static find (filter) {
-    return new Promise((resolve, reject) => {
-      try {
-        Model.find(filter, (err, data) => {
-          if (err) return reject(err)
-          resolve(data)
-        })
-      } catch (error) {
-        reject(error)
-      }
-    })
-  }
-
-  static findOne (filter) {
-    return new Promise((resolve, reject) => {
-      try {
-        Model.findOne(filter, (err, data) => {
-          if (err) return reject(err)
-          resolve(data)
-        })
-      } catch (error) {
-        reject(error)
-      }
-    })
-  }
-
-  static findById (_id) {
-    return Model.findById(_id).exec()
-  }
-
-  static updateById (id, values) {
-    return new Promise((resolve, reject) => {
-      try {
-        Model.findByIdAndUpdate(id, values, { new: true }, (err, data) => {
-          if (err) return reject(err)
-          resolve(data)
-        })
-      } catch (error) {
-        reject(error)
-      }
-    })
+export default class ProductModel extends BaseModel {
+  constructor () {
+    super('product', 'products', schema)
   }
 }

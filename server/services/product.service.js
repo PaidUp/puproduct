@@ -1,24 +1,24 @@
 import { ProductModel } from '@/models'
 import { Types } from 'mongoose'
+const productModel = new ProductModel()
 
 let ObjectId = Types.ObjectId
 
 export default class productService {
   static save (product) {
-    return ProductModel.save(product).then(product => product)
+    return productModel.save(product).then(product => product)
   }
 
   static updateById (id, product) {
-    // const values = {$set: product}
-    return ProductModel.updateById(id, product).then(product => product)
+    return productModel.updateById(id, product).then(product => product)
   }
 
   static getProductById (productId) {
-    return ProductModel.findById(productId).then(product => product)
+    return productModel.findById(productId).then(product => product)
   }
 
   static getListByOrganizationId (organizationId) {
-    return ProductModel.find({organizationId}).then(products => products)
+    return productModel.find({organizationId}).then(products => products)
   }
 
   static getByOrganizationId (organizationId, productId) {
@@ -26,6 +26,6 @@ export default class productService {
       _id: new ObjectId(productId),
       organizationId
     }
-    return ProductModel.findOne(fileter).then(product => product)
+    return productModel.findOne(fileter).then(product => product)
   }
 }
