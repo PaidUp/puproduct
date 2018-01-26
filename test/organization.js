@@ -35,7 +35,7 @@ it('GET# /:organizationId it should retrieve an organization', done => {
     })
 })
 
-it('PUT# /:id/payment/:paymentId it should update payment id an organization', done => {
+it('PUT# /:organizationId/payment/:paymentId it should update payment id an organization', done => {
   chai
     .request(server)
     .put('/api/v1/organization/' + organizationResults.organizationId + '/payment/paymentIdTest')
@@ -61,6 +61,25 @@ it('PUT# /:id/payment/:paymentId it should update payment id an organization', d
       res.body.should.have.property('dda')
       res.body.dda.should.be.a('string')
       res.body.dda.should.equal('')
+      done()
+    })
+})
+
+it('PUT# /:organizationId it should update an organization', done => {
+  chai
+    .request(server)
+    .put('/api/v1/organization/' + organizationResults.organizationId)
+    .set('authorization', token)
+    .send({website: 'http://teamtest.com'})
+    .end((err, res) => {
+      res.should.have.status(200)
+      res.body.should.have.property('website')
+      res.body.website.should.be.a('string')
+      res.body.website.should.equal('http://teamtest.com')
+
+      res.body.should.have.property('verify')
+      res.body.verify.should.be.a('string')
+      res.body.verify.should.equal('done')
       done()
     })
 })

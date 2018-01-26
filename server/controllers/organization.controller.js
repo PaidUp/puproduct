@@ -25,6 +25,16 @@ export default class OrganizationCotroller {
     })
   }
 
+  static updateById (req, res) {
+    let hr = new HandlerResponse(res)
+    let values = req.body
+    OrganizationService.updateById(req.params.organizationId, values).then(organization => {
+      return hr.send(organization)
+    }).catch(reason => {
+      return hr.error(reason)
+    })
+  }
+
   static getOrganization (req, res) {
     let hr = new HandlerResponse(res)
     OrganizationService.getOrganization(req.params.organizationId).then(organization => {
