@@ -1,11 +1,11 @@
-import { ProductService } from '@/services'
+import { PaymentService } from '@/services'
 import { HandlerResponse } from '@/util'
 
-export default class ProductController {
+export default class PaymentController {
   static save (req, res) {
     let hr = new HandlerResponse(res)
-    const product = req.body
-    ProductService.save(product).then(result => {
+    const payment = req.body
+    PaymentService.save(payment).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -14,9 +14,9 @@ export default class ProductController {
 
   static updateById (req, res) {
     let hr = new HandlerResponse(res)
-    const product = req.body
-    const productId = req.params.productId
-    ProductService.updateById(productId, product).then(result => {
+    const payment = req.body
+    const paymentId = req.params.productId
+    PaymentService.updateById(paymentId, payment).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -25,38 +25,38 @@ export default class ProductController {
 
   static getById (req, res) {
     let hr = new HandlerResponse(res)
-    const productId = req.params.productId
-    ProductService.getById(productId).then(result => {
+    const paymentId = req.params.paymentId
+    PaymentService.getById(paymentId).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
     })
   }
 
-  static getListByOrganizationId (req, res) {
+  static getListByProductId (req, res) {
     let hr = new HandlerResponse(res)
-    const organizationId = req.params.organizationId
-    if (!organizationId) {
+    const productId = req.params.productId
+    if (!productId) {
       return hr.error('organizationId is required', 422)
     }
-    ProductService.getListByOrganizationId(organizationId).then(result => {
+    PaymentService.getListByProductId(productId).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
     })
   }
 
-  static getByOrganizationId (req, res) {
+  static getByProductId (req, res) {
     let hr = new HandlerResponse(res)
-    const organizationId = req.params.organizationId
     const productId = req.params.productId
-    if (!organizationId) {
-      return hr.error('organizationId is required', 422)
+    const paymentId = req.params.paymentId
+    if (!paymentId) {
+      return hr.error('paymentId is required', 422)
     }
     if (!productId) {
       return hr.error('productId is required', 422)
     }
-    ProductService.getByOrganizationId(organizationId, productId).then(result => {
+    PaymentService.getByOrganizationId(productId, paymentId).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)

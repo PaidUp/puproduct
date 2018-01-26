@@ -35,9 +35,9 @@ export default class OrganizationCotroller {
     })
   }
 
-  static getOrganization (req, res) {
+  static getById (req, res) {
     let hr = new HandlerResponse(res)
-    OrganizationService.getOrganization(req.params.organizationId).then(organization => {
+    OrganizationService.getById(req.params.organizationId).then(organization => {
       return hr.send(organization)
     }).catch(reason => {
       return hr.error(reason)

@@ -4,7 +4,7 @@ const productModel = new ProductModel()
 
 let ObjectId = Types.ObjectId
 
-export default class productService {
+export default class ProductService {
   static save (product) {
     return productModel.save(product).then(product => product)
   }
@@ -13,7 +13,7 @@ export default class productService {
     return productModel.updateById(id, product).then(product => product)
   }
 
-  static getProductById (productId) {
+  static getById (productId) {
     return productModel.findById(productId).then(product => product)
   }
 

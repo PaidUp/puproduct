@@ -15,7 +15,7 @@ export default class OrganizationService {
     return organizationModel.updateById(organizationId, values).then(data => data)
   }
 
-  static getOrganization (_id) {
+  static getById (_id) {
     return organizationModel.findById(_id).then(organization => organization)
   }
 }
