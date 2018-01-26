@@ -65,7 +65,7 @@ it('GET# /organization/:organizationId/product/:productId it should retrieve an 
     })
 })
 
-it('PUT# /:id/ it should update a product', done => {
+it('PUT# /:productId/ it should update a product', done => {
   chai
     .request(server)
     .put('/api/v1/product/'+ results.product.productId)

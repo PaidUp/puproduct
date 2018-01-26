@@ -3,29 +3,29 @@ import config from '@/config/environment'
 
 let schema = new mongoose.Schema({
   ownerId: { type: String },
-  ownerFirstName: { type: String, required: true }, // required //email //newDesign
-  ownerLastName: { type: String, required: true }, // required //email //newDesign
-  ownerDOB: { type: Date }, // required //email //newDesign
-  ownerSSN: { type: String, required: true }, // required //email //newDesign
-  ownerEmail: { type: String }, // email //response
-  ownerPhone: { type: String }, // email
-  country: { type: String, default: 'US' }, // required //email //response
-  state: { type: String, required: true }, // required //email //newDesign
-  city: { type: String, required: true }, // required //email //newDesign
-  zipCode: { type: String, required: true }, // required //newDesign
-  averagePayment: { type: String, default: '1' }, // email
-  EIN: { type: String }, // required //email //newDesign
-  Address: { type: String, required: true }, // required //email //newDesign
-  AddressLineTwo: { type: String }, // required //email //newDesign
-  website: { type: String, default: 'https://www.getpaidup.com' }, // email
-  businessName: { type: String, required: true }, // required //email //newDesign
-  businessType: { type: String, required: true }, // required //newDesign
-  aba: { type: String, required: true }, // required //email //response //newDesign
-  dda: { type: String, required: true }, // required //email //response //newDesign
+  ownerFirstName: { type: String, required: true },
+  ownerLastName: { type: String, required: true },
+  ownerDOB: { type: Date },
+  ownerSSN: { type: String, required: true },
+  ownerEmail: { type: String },
+  ownerPhone: { type: String },
+  country: { type: String, default: 'US' },
+  state: { type: String, required: true },
+  city: { type: String, required: true },
+  zipCode: { type: String, required: true },
+  averagePayment: { type: String, default: '1' },
+  EIN: { type: String },
+  Address: { type: String, required: true },
+  AddressLineTwo: { type: String },
+  website: { type: String, default: 'https://www.getpaidup.com' },
+  businessName: { type: String, required: true },
+  businessType: { type: String, required: true },
+  aba: { type: String, required: true },
+  dda: { type: String, required: true },
   createAt: { type: Date, default: new Date() },
   updateAt: { type: Date, default: new Date() },
   verify: { type: String, default: 'pending' },
-  referralCode: { type: String, default: '' }, // email
+  referralCode: { type: String, default: '' },
   paymentId: { type: String, default: '' },
   seasons: { type: [String], default: [] }
 })
@@ -35,10 +35,6 @@ let Model = mongoose.model(
   schema,
   config.mongo.prefix + 'organizations'
 )
-
-/* 0*
-* Pre-save hook
-*/
 
 schema.pre('save', function (next) {
   if (!this.isNew) return next()
