@@ -125,9 +125,9 @@ export default class ProductModel {
     return Model.findById(_id).exec()
   }
 
-  static updateById (id, value) {
+  static updateById (id, values) {
     return new Promise((resolve, reject) => {
-      Model.findByIdAndUpdate(id, value, { new: true }, (err, data) => {
+      Model.findByIdAndUpdate(id, values, { new: true }, (err, data) => {
         if (err) return reject(err)
         resolve(data)
       })

@@ -6,7 +6,7 @@ let token = common.token
 let chai = common.chai
 let results = common.results
 
-it('POST:/ it should create a product', done => {
+it('POST# / it should create a product', done => {
   results.product.payload.organizationId = results.organization.organizationId
   chai
     .request(server)
@@ -22,7 +22,7 @@ it('POST:/ it should create a product', done => {
     })
 })
 
-it('GET:/:id it should retrieve a product', done => {
+it('GET# /:productId it should retrieve a product', done => {
   chai
     .request(server)
     .get('/api/v1/product/' + results.product.productId)
@@ -37,7 +37,7 @@ it('GET:/:id it should retrieve a product', done => {
     })
 })
 
-it('GET:/organization/:organizationId/products it should retrieve an organization', done => {
+it('GET# /organization/:organizationId/products it should retrieve an organization', done => {
   chai
     .request(server)
     .get('/api/v1/organization/' + results.organization.organizationId + '/products')
@@ -50,7 +50,7 @@ it('GET:/organization/:organizationId/products it should retrieve an organizatio
     })
 })
 
-it('GET:/organization/:organizationId/product/:productId it should retrieve an organization', done => {
+it('GET# /organization/:organizationId/product/:productId it should retrieve an organization', done => {
   chai
     .request(server)
     .get('/api/v1/organization/' + results.organization.organizationId + '/product/' + results.product.productId)
@@ -65,7 +65,7 @@ it('GET:/organization/:organizationId/product/:productId it should retrieve an o
     })
 })
 
-it('PUT:/:id/ it should update a product', done => {
+it('PUT# /:id/ it should update a product', done => {
   chai
     .request(server)
     .put('/api/v1/product/'+ results.product.productId)

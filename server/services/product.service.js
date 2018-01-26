@@ -9,19 +9,19 @@ export default class productService {
   }
 
   static updateById (id, product) {
-    const values = {$set: product}
-    return ProductModel.updateById(id, values).then(product => product)
+    // const values = {$set: product}
+    return ProductModel.updateById(id, product).then(product => product)
   }
 
   static getProductById (productId) {
     return ProductModel.findById(productId).then(product => product)
   }
 
-  static getProductsByOrganizationId (organizationId) {
+  static getListByOrganizationId (organizationId) {
     return ProductModel.find({organizationId}).then(products => products)
   }
 
-  static getProductByOrganizationId (organizationId, productId) {
+  static getByOrganizationId (organizationId, productId) {
     const fileter = {
       _id: new ObjectId(productId),
       organizationId

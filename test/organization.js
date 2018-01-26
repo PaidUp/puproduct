@@ -6,10 +6,10 @@ let token = common.token
 let chai = common.chai
 let organizationResults = common.results.organization
 
-it('POST:/request it should create an organization', done => {
+it('POST# / it should create an organization', done => {
   chai
     .request(server)
-    .post('/api/v1/organization/request')
+    .post('/api/v1/organization')
     .set('authorization', token)
     .send(organizationResults.payload)
     .end((err, res) => {
@@ -21,21 +21,7 @@ it('POST:/request it should create an organization', done => {
     })
 })
 
-it('GET:/response/:id it should retrieve an organization', done => {
-  chai
-    .request(server)
-    .get('/api/v1/organization/response/' + organizationResults.organizationId)
-    .set('authorization', token)
-    .end((err, res) => {
-      res.should.have.status(200)
-      res.body.should.have.property('_id')
-      res.body._id.should.be.a('string')
-      organizationResults.document = res.body
-      done()
-    })
-})
-
-it('GET:/:id it should retrieve an organization', done => {
+it('GET# /:organizationId it should retrieve an organization', done => {
   chai
     .request(server)
     .get('/api/v1/organization/' + organizationResults.organizationId)
@@ -49,10 +35,10 @@ it('GET:/:id it should retrieve an organization', done => {
     })
 })
 
-it('PUT:/response/:id/:paymentId it should create an organization', done => {
+it('PUT# /:id/payment/:paymentId it should update payment id an organization', done => {
   chai
     .request(server)
-    .put('/api/v1/organization/response/' + organizationResults.organizationId + '/paymentIdTest')
+    .put('/api/v1/organization/' + organizationResults.organizationId + '/payment/paymentIdTest')
     .set('authorization', token)
     .end((err, res) => {
       res.should.have.status(200)

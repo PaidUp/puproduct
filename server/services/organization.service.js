@@ -2,7 +2,7 @@ import { OrganizationModel } from '@/models'
 import { Ncryp } from '@/util'
 
 export default class OrganizationService {
-  static organizationRequest (userId, dataOrganization) {
+  static save (userId, dataOrganization) {
     dataOrganization.ownerId = userId
     dataOrganization.aba = Ncryp.encryptField(dataOrganization.aba)
     dataOrganization.dda = Ncryp.encryptField(dataOrganization.dda)
@@ -10,14 +10,8 @@ export default class OrganizationService {
     return OrganizationModel.save(dataOrganization).then(data => data)
   }
 
-  static organizationResponse (organizationId) {
-    return OrganizationModel.findById(organizationId).then(organization => organization)
-  }
-
-  static organizationResponseUpdate (organizationId, paymentId, cb) {
-    let query = {_id: organizationId}
-    let val = {verify: 'done', aba: '', dda: '', ownerSSN: '', paymentId: paymentId}
-    return OrganizationModel.updateById(query, val).then(data => data)
+  static updateById (organizationId, values, cb) {
+    return OrganizationModel.updateById(organizationId, values).then(data => data)
   }
 
   static getOrganization (_id) {

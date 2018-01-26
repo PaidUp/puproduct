@@ -2,9 +2,9 @@ import { OrganizationService } from '@/services'
 import { HandlerResponse } from '@/util'
 
 export default class OrganizationCotroller {
-  static organizationRequest (req, res) {
+  static save (req, res) {
     let hr = new HandlerResponse(res)
-    OrganizationService.organizationRequest(req.body.userId, req.body.organizationInfo)
+    OrganizationService.save(req.body.userId, req.body.organizationInfo)
       .then(organization => {
         return hr.send({organizationId: organization._id})
       }).catch(reason => {
@@ -12,21 +12,10 @@ export default class OrganizationCotroller {
       })
   }
 
-  static organizationResponse (req, res) {
+  static updatePaymentId (req, res) {
     let hr = new HandlerResponse(res)
-    OrganizationService.organizationResponse(req.params.id).then(organization => {
-      if (!organization) {
-        return hr.error({name: 'ValidationError', message: 'organization does not exists', errors: 'organization does not exists or was processed'}, 400)
-      }
-      return hr.send(organization)
-    }).catch(reason => {
-      return hr.error(reason)
-    })
-  }
-
-  static organizationResponseUpdate (req, res) {
-    let hr = new HandlerResponse(res)
-    OrganizationService.organizationResponseUpdate(req.params.id, req.params.paymentId).then(organization => {
+    let values = {verify: 'done', aba: '', dda: '', ownerSSN: '', paymentId: req.params.paymentId}
+    OrganizationService.updateById(req.params.organizationId, values).then(organization => {
       if (!organization) {
         return hr.error({name: 'ValidationError', message: 'organization was processed', errors: 'organization does not exists or was processed'}, 400)
       }
