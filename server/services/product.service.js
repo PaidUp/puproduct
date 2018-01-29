@@ -1,27 +1,20 @@
 import { ProductModel } from '@/models'
 import { Types } from 'mongoose'
+import CommonService from './common.service'
 const productModel = new ProductModel()
 
 let ObjectId = Types.ObjectId
 
-export default class ProductService {
-  static save (product) {
-    return productModel.save(product).then(product => product)
+export default class ProductService extends CommonService {
+  constructor () {
+    super(productModel)
   }
 
-  static updateById (id, product) {
-    return productModel.updateById(id, product).then(product => product)
-  }
-
-  static getById (productId) {
-    return productModel.findById(productId).then(product => product)
-  }
-
-  static getListByOrganizationId (organizationId) {
+  getListByOrganizationId (organizationId) {
     return productModel.find({organizationId}).then(products => products)
   }
 
-  static getByOrganizationId (organizationId, productId) {
+  getByOrganizationId (organizationId, productId) {
     const fileter = {
       _id: new ObjectId(productId),
       organizationId

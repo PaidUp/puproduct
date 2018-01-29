@@ -1,4 +1,4 @@
-import BaseModel from './base.model'
+import CommonModel from './common.model'
 
 const dues = {
   version: { type: String, required: true, default: 'v2' },
@@ -16,7 +16,7 @@ const schema = {
   dues: { type: [dues], required: true }
 }
 
-export default class OrganizationModel extends BaseModel {
+export default class OrganizationModel extends CommonModel {
   constructor () {
     super('payment', 'payments', schema)
   }

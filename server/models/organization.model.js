@@ -1,4 +1,4 @@
-import BaseModel from './base.model'
+import CommonModel from './common.model'
 
 const schema = {
   ownerId: { type: String },
@@ -28,7 +28,7 @@ const schema = {
   seasons: { type: [String], default: [] }
 }
 
-export default class OrganizationModel extends BaseModel {
+export default class OrganizationModel extends CommonModel {
   constructor () {
     super('organization', 'organizations', schema)
   }

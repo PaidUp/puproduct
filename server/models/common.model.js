@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import config from '@/config/environment'
 
-export default class BaseModel {
+export default class CommonModel {
   constructor (name, document, schemaObj) {
     schemaObj['createAt'] = { type: Date, default: Date.now }
     schemaObj['updateAt'] = { type: Date, default: Date.now }

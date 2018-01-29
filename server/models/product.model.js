@@ -1,4 +1,4 @@
-import BaseModel from './base.model'
+import CommonModel from './common.model'
 
 const formData = {
   model: { type: String, required: true },
@@ -70,7 +70,7 @@ const schema = {
   paysFees: { type: paysFees, required: true }
 }
 
-export default class ProductModel extends BaseModel {
+export default class ProductModel extends CommonModel {
   constructor () {
     super('product', 'products', schema)
   }

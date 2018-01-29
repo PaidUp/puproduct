@@ -1,11 +1,12 @@
 import { ProductService } from '@/services'
 import { HandlerResponse } from '@/util'
+const productService = new ProductService()
 
 export default class ProductController {
   static save (req, res) {
     let hr = new HandlerResponse(res)
     const product = req.body
-    ProductService.save(product).then(result => {
+    productService.save(product).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -16,7 +17,7 @@ export default class ProductController {
     let hr = new HandlerResponse(res)
     const product = req.body
     const productId = req.params.productId
-    ProductService.updateById(productId, product).then(result => {
+    productService.updateById(productId, product).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -26,7 +27,7 @@ export default class ProductController {
   static getById (req, res) {
     let hr = new HandlerResponse(res)
     const productId = req.params.productId
-    ProductService.getById(productId).then(result => {
+    productService.getById(productId).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -39,7 +40,7 @@ export default class ProductController {
     if (!organizationId) {
       return hr.error('organizationId is required', 422)
     }
-    ProductService.getListByOrganizationId(organizationId).then(result => {
+    productService.getListByOrganizationId(organizationId).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -56,7 +57,7 @@ export default class ProductController {
     if (!productId) {
       return hr.error('productId is required', 422)
     }
-    ProductService.getByOrganizationId(organizationId, productId).then(result => {
+    productService.getByOrganizationId(organizationId, productId).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
