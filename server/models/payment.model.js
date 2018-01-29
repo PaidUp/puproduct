@@ -12,7 +12,7 @@ const schema = {
   productId: { type: String, required: true },
   description: { type: String, required: true },
   visible: { type: Boolean, required: true },
-  paymentMethods: { type: String, enum: ['bank', 'card'], lowercase: true },
+  paymentMethods: { type: [String], enum: ['bank', 'card'], lowercase: true },
   dues: { type: [dues], required: true }
 }
 

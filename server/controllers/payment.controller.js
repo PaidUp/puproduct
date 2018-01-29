@@ -16,7 +16,7 @@ export default class PaymentController {
   static updateById (req, res) {
     let hr = new HandlerResponse(res)
     const payment = req.body
-    const paymentId = req.params.productId
+    const paymentId = req.params.paymentId
     paymentService.updateById(paymentId, payment).then(result => {
       hr.send(result)
     }).catch(reason => {

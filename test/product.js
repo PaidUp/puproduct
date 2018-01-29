@@ -37,7 +37,7 @@ it('GET# /:productId it should retrieve a product', done => {
     })
 })
 
-it('GET# /organization/:organizationId/products it should retrieve an organization', done => {
+it('GET# /organization/:organizationId/products it should retrieve a product list by organization', done => {
   chai
     .request(server)
     .get('/api/v1/organization/' + results.organization.organizationId + '/products')
@@ -50,7 +50,7 @@ it('GET# /organization/:organizationId/products it should retrieve an organizati
     })
 })
 
-it('GET# /organization/:organizationId/product/:productId it should retrieve an organization', done => {
+it('GET# /organization/:organizationId/product/:productId it should retrieve a product by organization', done => {
   chai
     .request(server)
     .get('/api/v1/organization/' + results.organization.organizationId + '/product/' + results.product.productId)

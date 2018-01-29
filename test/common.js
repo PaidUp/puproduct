@@ -5,7 +5,8 @@ let should = chai.should()
 let token = require('../server/config/environment').default.nodePass.me.token
 let results = {
   organization: {},
-  product: {}
+  product: {},
+  payment: {}
 }
 
 results.organization.payload = {
@@ -41,68 +42,123 @@ results.organization.payload = {
 }
 
 results.product.payload = {
-  "paymentId": "acct_18OZ8zIhv1Yesxk9",
-  "season": "test",
-  "organizationId": "57b6139811627b1d0ddbee30",
-  "organizationName": "Cobras Volleyball Club",
-  "organizationLocation": "San Antonio, TX",
-  "sku": "TX - SAN ANTONIO - COBRAS VOLLEYBALL - 17 BLACK PREMIER 2016",
-  "name": "17 Black (Premier)",
-  "description": "17 Black (Premier)",
-  "startAt": "2016-06-25",
-  "endAt": "2017-03-31",
-  "location": "San Antonio, TX",
-  "geojson": {},
-  "visibility": true,
-  "status": true,
-  "image": "value image url",
-  "categories": [],
-  "relatedProducts": [],
-  "statementDescriptor": "PaidUp Cobras 17 Black",
-  "customInfo": {
-    "formData": [],
-    "formTemplate": [
+  paymentId: 'acct_18OZ8zIhv1Yesxk9',
+  season: 'test',
+  organizationId: '57b6139811627b1d0ddbee30',
+  organizationName: 'Cobras Volleyball Club',
+  organizationLocation: 'San Antonio, TX',
+  sku: 'TX - SAN ANTONIO - COBRAS VOLLEYBALL - 17 BLACK PREMIER 2016',
+  name: '17 Black (Premier)',
+  description: '17 Black (Premier)',
+  startAt: '2016-06-25',
+  endAt: '2017-03-31',
+  location: 'San Antonio, TX',
+  geojson: {},
+  visibility: true,
+  status: true,
+  image: 'value image url',
+  categories: [],
+  relatedProducts: [],
+  statementDescriptor: 'PaidUp Cobras 17 Black',
+  customInfo: {
+    formData: [],
+    formTemplate: [
       {
-        "type": "text",
-        "placeholder": "Athlete First Name",
-        "name": "Athlete First Name",
-        "model": "athleteFirstName",
-        "displayed": true,
-        "required": true
+        type: 'text',
+        placeholder: 'Athlete First Name',
+        name: 'Athlete First Name',
+        model: 'athleteFirstName',
+        displayed: true,
+        required: true
       },
       {
-        "type": "text",
-        "placeholder": "Athlete Last Name",
-        "name": "Athlete Last Name",
-        "model": "athleteLastName",
-        "displayed": true,
-        "required": true
+        type: 'text',
+        placeholder: 'Athlete Last Name',
+        name: 'Athlete Last Name',
+        model: 'athleteLastName',
+        displayed: true,
+        required: true
       }
     ]
   },
-  "processingFees": {
-    "cardFeeActual": 2.9,
-    "cardFeeDisplay": 2.9,
-    "cardFeeFlatActual": 0.3,
-    "cardFeeFlatDisplay": 0.3,
-    "achFeeActual": 0.8,
-    "achFeeDisplay": 2.3,
-    "achFeeFlatActual": 0,
-    "achFeeFlatDisplay": 0,
-    "achFeeCapActual": 0.25,
-    "achFeeCapDisplay": 5
+  processingFees: {
+    cardFeeActual: 2.9,
+    cardFeeDisplay: 2.9,
+    cardFeeFlatActual: 0.3,
+    cardFeeFlatDisplay: 0.3,
+    achFeeActual: 0.8,
+    achFeeDisplay: 2.3,
+    achFeeFlatActual: 0,
+    achFeeFlatDisplay: 0,
+    achFeeCapActual: 0.25,
+    achFeeCapDisplay: 5
   },
-  "collectionsFee": {
-    "fee": 3.5,
-    "feeFlat": 0
+  collectionsFee: {
+    fee: 3.5,
+    feeFlat: 0
   },
-  "paysFees": {
-    "processing": true,
-    "collections": true
+  paysFees: {
+    processing: true,
+    collections: true
   }
 }
 
-
+results.payment.payload = {
+  key: 'monthly',
+  description: 'Monthly Payments',
+  paymentMethods: ['card'],
+  visible: true,
+  dues: [
+    {
+      version: 'v2',
+      description: 'Deposit',
+      dateCharge: '2017-01-01 10:00',
+      amount: 500.0,
+      discount: 0,
+      applyDiscount: false
+    },
+    {
+      version: 'v2',
+      description: 'Payment 1 of 5',
+      dateCharge: '2017-09-01 10:00',
+      amount: 500.0,
+      discount: 0,
+      applyDiscount: false
+    },
+    {
+      version: 'v2',
+      description: 'Payment 2 of 5',
+      dateCharge: '2017-10-01 10:00',
+      amount: 450.0,
+      discount: 0,
+      applyDiscount: false
+    },
+    {
+      version: 'v2',
+      description: 'Payment 3 of 5',
+      dateCharge: '2017-11-01 10:00',
+      amount: 400.0,
+      discount: 0,
+      applyDiscount: false
+    },
+    {
+      version: 'v2',
+      description: 'Payment 4 of 5',
+      dateCharge: '2017-12-01 10:00',
+      amount: 300.0,
+      discount: 0,
+      applyDiscount: false
+    },
+    {
+      version: 'v2',
+      description: 'Payment 5 of 5',
+      dateCharge: '2017-01-01 10:00',
+      amount: 100.0,
+      discount: 0,
+      applyDiscount: false
+    }
+  ]
+}
 
 chai.use(chaiHttp)
 
