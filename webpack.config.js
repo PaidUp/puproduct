@@ -2,7 +2,7 @@ var path = require('path')
 var nodeExternals = require('webpack-node-externals')
 const NodemonPlugin = require('nodemon-webpack-plugin')
 
-module.exports = {
+let wpc = {
   target: 'node',
   externals: [nodeExternals()],
   entry: './server/app.js',
@@ -35,10 +35,10 @@ module.exports = {
     }
   },
   plugins: [
-    new NodemonPlugin(
-      {
-        nodeArgs: [ '--inspect' ]
-      }
-    )
+    new NodemonPlugin({
+      nodeArgs: ['--inspect']
+    })
   ]
 }
+
+module.exports = wpc
