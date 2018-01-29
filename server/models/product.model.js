@@ -37,11 +37,6 @@ const paysFees = {
   collections: { type: Boolean, required: true }
 }
 
-const geojson = {
-  type: { type: String, required: true, default: 'Point' },
-  coordinates: {type: [Number], required: true}
-}
-
 const schema = {
   paymentId: { type: String, required: true },
   season: { type: String, required: true },
@@ -51,15 +46,10 @@ const schema = {
   sku: { type: String, required: true },
   name: { type: String, required: true },
   description: { type: String, required: true },
-  startAt: { type: Date, required: true },
-  endAt: { type: Date, required: true },
   location: { type: String, required: true },
-  geojson: {type: geojson},
   visibility: { type: Boolean, required: true, default: true },
   status: { type: Boolean, required: true, default: true },
   image: { type: String, required: true },
-  categories: { type: [String] },
-  relatedProducts: { type: [String] },
   statementDescriptor: { type: String, required: true },
   customInfo: {
     formData: { type: [formData], required: true },
