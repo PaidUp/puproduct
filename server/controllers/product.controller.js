@@ -40,7 +40,7 @@ export default class ProductController {
     if (!organizationId) {
       return hr.error('organizationId is required', 422)
     }
-    productService.getListByOrganizationId(organizationId).then(result => {
+    productService.find({organizationId}).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -57,7 +57,7 @@ export default class ProductController {
     if (!productId) {
       return hr.error('productId is required', 422)
     }
-    productService.getByOrganizationId(organizationId, productId).then(result => {
+    productService.getByIdAndFilter(productId, {organizationId}).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)

@@ -40,7 +40,7 @@ export default class PaymentController {
     if (!productId) {
       return hr.error('organizationId is required', 422)
     }
-    paymentService.getListByProductId(productId).then(result => {
+    paymentService.find({productId}).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -57,7 +57,7 @@ export default class PaymentController {
     if (!productId) {
       return hr.error('productId is required', 422)
     }
-    paymentService.getByOrganizationId(productId, paymentId).then(result => {
+    paymentService.getByIdAndFilter(paymentId, {productId}).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
