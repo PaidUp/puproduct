@@ -16,8 +16,8 @@ const schema = {
   dues: { type: [dues], required: true }
 }
 
-export default class OrganizationModel extends CommonModel {
+export default class PlanModel extends CommonModel {
   constructor () {
-    super('payment', 'payments', schema)
+    super('plan', 'plans', schema)
   }
 }

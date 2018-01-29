@@ -1,12 +1,12 @@
-import { PaymentService } from '@/services'
+import { PlanService } from '@/services'
 import { HandlerResponse } from '@/util'
-const paymentService = new PaymentService()
+const planService = new PlanService()
 
-export default class PaymentController {
+export default class PlanController {
   static save (req, res) {
     let hr = new HandlerResponse(res)
     const payment = req.body
-    paymentService.save(payment).then(result => {
+    planService.save(payment).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -16,8 +16,8 @@ export default class PaymentController {
   static updateById (req, res) {
     let hr = new HandlerResponse(res)
     const payment = req.body
-    const paymentId = req.params.paymentId
-    paymentService.updateById(paymentId, payment).then(result => {
+    const planId = req.params.planId
+    planService.updateById(planId, payment).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -26,8 +26,8 @@ export default class PaymentController {
 
   static getById (req, res) {
     let hr = new HandlerResponse(res)
-    const paymentId = req.params.paymentId
-    paymentService.getById(paymentId).then(result => {
+    const planId = req.params.planId
+    planService.getById(planId).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -40,7 +40,7 @@ export default class PaymentController {
     if (!productId) {
       return hr.error('organizationId is required', 422)
     }
-    paymentService.find({productId}).then(result => {
+    planService.find({productId}).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -50,14 +50,14 @@ export default class PaymentController {
   static getByProductId (req, res) {
     let hr = new HandlerResponse(res)
     const productId = req.params.productId
-    const paymentId = req.params.paymentId
-    if (!paymentId) {
-      return hr.error('paymentId is required', 422)
+    const planId = req.params.planId
+    if (!planId) {
+      return hr.error('planId is required', 422)
     }
     if (!productId) {
       return hr.error('productId is required', 422)
     }
-    paymentService.getByIdAndFilter(paymentId, {productId}).then(result => {
+    planService.getByIdAndFilter(planId, {productId}).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)

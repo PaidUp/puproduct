@@ -1,9 +1,9 @@
-import { PaymentModel } from '@/models'
+import { PlanModel } from '@/models'
 import CommonService from './common.service'
-const paymentModel = new PaymentModel()
+const planModel = new PlanModel()
 
 export default class PaymentService extends CommonService {
   constructor () {
-    super(paymentModel)
+    super(planModel)
   }
 }

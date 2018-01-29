@@ -4,8 +4,8 @@ import { OrganizationController, ProductController } from '@/controllers'
 
 const router = express.Router()
 router.post('/', isAuthenticated, OrganizationController.save)
-router.put('/:organizationId/payment/:paymentId', isAuthenticated, OrganizationController.updatePaymentId)
 router.put('/:organizationId', isAuthenticated, OrganizationController.updateById)
+router.put('/:organizationId/payment/:paymentId', isAuthenticated, OrganizationController.updatePaymentId)
 router.get('/:organizationId', isAuthenticated, OrganizationController.getById)
 
 router.get('/:organizationId/products', isAuthenticated, ProductController.getListByOrganizationId)

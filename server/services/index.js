@@ -1,9 +1,9 @@
 import OrganizationService from './organization.service'
 import ProductService from './product.service'
-import PaymentService from './payment.service'
+import PlanService from './plan.service'
 
 export {
   OrganizationService,
   ProductService,
-  PaymentService
+  PlanService
 }

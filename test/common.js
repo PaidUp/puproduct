@@ -6,7 +6,7 @@ let token = require('../server/config/environment').default.nodePass.me.token
 let results = {
   organization: {},
   product: {},
-  payment: {}
+  plan: {}
 }
 
 results.organization.payload = {
@@ -103,7 +103,7 @@ results.product.payload = {
   }
 }
 
-results.payment.payload = {
+results.plan.payload = {
   key: 'monthly',
   description: 'Monthly Payments',
   paymentMethods: ['card'],
